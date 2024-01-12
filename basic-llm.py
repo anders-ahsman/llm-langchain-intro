@@ -8,18 +8,17 @@ MODEL_NAME = "gpt-3.5-turbo"
 
 def main():
     prompt = ChatPromptTemplate.from_messages(
-        [("system", "You are an expert translator from English to Swedish."), ("user", "{input}")]
+        [("system", "You are an helpful chatbot that likes to tell jokes."), ("user", "{input}")]
     )
     llm = ChatOpenAI(model_name=MODEL_NAME)
     output_parser = StrOutputParser()
 
     chain = prompt | llm | output_parser
 
-    print("Input something in English to translate into Swedish:")
-    text_to_translate = input()
+    print("Ask a question:")
+    user_input = input()
 
-    response = chain.invoke({"input": text_to_translate})
-
+    response = chain.invoke({"input": user_input})
     print(response)
 
 
