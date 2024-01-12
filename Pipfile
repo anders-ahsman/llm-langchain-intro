@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+langchain = "*"
+lancedb = "*"
+openai = "*"
+langchain-openai = "*"
+
+[dev-packages]
+flake8 = "*"
+mypy = "*"
+
+[requires]
+python_version = "3.11"
