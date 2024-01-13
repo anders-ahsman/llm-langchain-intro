@@ -18,8 +18,9 @@ def main():
 
     chain = prompt | llm | output_parser
 
-    print("Ask a question:")
-    user_input = input()
+    user_input = input("Ask a question (or type 'exit'): ")
+    if user_input == "exit":
+        return
 
     response = chain.invoke({"input": user_input})
     print(response)
