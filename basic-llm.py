@@ -1,29 +1,27 @@
-from langchain.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser
 from langchain_openai import ChatOpenAI
 
 MODEL_NAME = "gpt-3.5-turbo"
-# MODEL_NAME="gpt-4"
+# MODEL_NAME = "gpt-4"
 
 
 def main():
-    prompt = ChatPromptTemplate.from_messages(
-        [
-            ("system", "You are an helpful chatbot that likes to tell jokes."),
-            ("human", "{input}"),
-        ]
-    )
+    conversation = "System: You are an helpful chatbot that likes to tell jokes."
     llm = ChatOpenAI(model_name=MODEL_NAME)
-    output_parser = StrOutputParser()
 
-    chain = prompt | llm | output_parser
+    while True:
+        user_input = input("Ask a question (or type 'exit'): ")
+        if user_input == "exit":
+            return
 
-    user_input = input("Ask a question (or type 'exit'): ")
-    if user_input == "exit":
-        return
+        # Add the user input to the conversation
+        conversation += f"\nHuman: {user_input}"
+        print(f"*** Conversation so far:\n{conversation}\n***\n")
 
-    response = chain.invoke({"input": user_input})
-    print(response)
+        response = llm.invoke(conversation)
+        print(response.content)
+
+        # Add the response to the conversation
+        conversation += f"\n{response.content}"
 
 
 if __name__ == "__main__":
