@@ -17,6 +17,7 @@ def main():
     """
     prompt = ChatPromptTemplate.from_template(template)
 
+    # Use contents of text file as context
     with open(TEXT_FILE, "r") as f:
         context = f.read()
 
