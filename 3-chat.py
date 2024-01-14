@@ -2,7 +2,6 @@ from langchain.chains import ConversationChain
 from langchain_openai import ChatOpenAI
 
 MODEL_NAME = "gpt-3.5-turbo"
-# MODEL_NAME="gpt-4"
 
 
 def main():
