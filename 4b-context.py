@@ -1,4 +1,5 @@
 from langchain.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 from langchain_openai import ChatOpenAI
 
 MODEL_NAME = "gpt-3.5-turbo"
@@ -15,10 +16,10 @@ def main():
     """
     prompt = ChatPromptTemplate.from_template(template)
 
-    context = {
-        "context": lambda _: "USA first visited the moon in 1950.",
-        "question": lambda x: x,
-    }
+    context = RunnableParallel(
+        context=lambda _: "USA first visited the moon in 1950.",
+        question=RunnablePassthrough(),
+    )
     chain = context | prompt | llm
 
     while True:
