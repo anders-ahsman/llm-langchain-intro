@@ -7,14 +7,14 @@ MODEL_NAME = "gpt-3.5-turbo"
 
 def main():
     llm = ChatOpenAI(model_name=MODEL_NAME)
-    conversation = ConversationChain(llm=llm)
+    conversation_chain = ConversationChain(llm=llm)
 
     while True:
         user_input = input("Ask a question (or type 'exit'): ")
         if user_input == "exit":
             break
 
-        response = conversation.predict(input=user_input)
+        response = conversation_chain.predict(input=user_input)
         print(response)
 
 
