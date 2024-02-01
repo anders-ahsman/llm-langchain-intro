@@ -7,8 +7,10 @@ name = "pypi"
 chromadb = "*"
 langchain = "*"
 langchain-openai = "*"
+matplotlib = "*"
 openai = "*"
 pandas = "*"
+scikit-learn = "*"
 
 [dev-packages]
 flake8 = "*"
