@@ -90,7 +90,12 @@ def visualize_embeddings(
     Visualize high-dimensional embeddings using t-SNE and annotate with texts.
     """
 
-    tsne = TSNE(n_components=n_components, perplexity=perplexity, init=init, random_state=random_state)
+    tsne = TSNE(
+        n_components=n_components,
+        perplexity=perplexity,
+        init=init,
+        random_state=random_state,
+    )
     embeddings_reduced = tsne.fit_transform(embeddings)
 
     plt.figure(figsize=(12, 10))
