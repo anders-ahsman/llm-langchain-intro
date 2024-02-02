@@ -1,7 +1,7 @@
-import lancedb
 from langchain_community.vectorstores import LanceDB
 from langchain_openai.embeddings import OpenAIEmbeddings
 
+import lancedb
 from common import EXAMPLE_TEXTS
 
 SEARCH_NUM_RESULTS = 3
@@ -10,24 +10,12 @@ SEARCH_NUM_RESULTS = 3
 def main():
     embeddings = OpenAIEmbeddings()
 
-    # Create a LanceDB table, overwrite if it already exists.
-    db = lancedb.connect("/tmp/lancedb")
-    table = db.create_table(
-        "my_table",
-        data=[
-            {
-                "vector": embeddings.embed_query("hello world"),
-                "text": "hello world",
-                "id": "1",
-            }
-        ],
-        mode="overwrite",
-    )
+    table, vectorstore = get_table_and_vectorstore(embeddings)
 
-    # Create a LanceDB vectorstore and add example texts.
-    vectorstore = LanceDB(table, embeddings)
+    # Add example texts to the database
     vectorstore.add_texts(EXAMPLE_TEXTS)
 
+    # Display the contents of the database
     print("Database contents:")
     print(table.to_pandas(), "\n")
 
@@ -41,6 +29,25 @@ def main():
         for r in result:
             print(r.page_content)
         print()
+
+
+def get_table_and_vectorstore(embeddings):
+    # Create a LanceDB table, overwrite if it already exists.
+    db = lancedb.connect("./lancedb")
+    table = db.create_table(
+        "my_table",
+        data=[
+            {
+                "vector": embeddings.embed_query("hello world"),
+                "text": "hello world",
+                "id": "1",
+            }
+        ],
+        mode="overwrite",
+    )
+    vectorstore = LanceDB(table, embeddings)
+
+    return table, vectorstore
 
 
 if __name__ == "__main__":
