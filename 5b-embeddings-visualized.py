@@ -33,11 +33,12 @@ def get_embeddings_and_texts() -> Tuple[np.ndarray, list[str]]:
         print("Embeddings and texts loaded from file.")
     except FileNotFoundError:
         print("Embeddings file not found, computing embeddings...")
+
+        # Note: This can be run in parallel for large datasets to speed up computation
         embeddings = np.array([embeddings_model.embed_query(text) for text in EXAMPLE_TEXTS])
-        texts = EXAMPLE_TEXTS
 
         # Save embeddings and texts together
-        np.savez(EMBEDDINGS_FILENAME, embeddings=embeddings, texts=texts)
+        np.savez(EMBEDDINGS_FILENAME, embeddings=embeddings, texts=EXAMPLE_TEXTS)
         print("Embeddings and texts saved to file.")
 
     return embeddings, texts
