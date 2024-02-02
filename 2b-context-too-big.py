@@ -22,7 +22,7 @@ def main():
         context = f.read()
 
     setup = RunnableParallel(
-        context=lambda _: context,  # context too long for model!
+        context=lambda _: context,  # Context too big for model, will throw an error!
         question=RunnablePassthrough(),
     )
     chain = setup | prompt | llm
