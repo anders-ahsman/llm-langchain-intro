@@ -14,7 +14,7 @@ def main():
         if user_input == "exit":
             return
 
-        # Here user_input is the context
+        # Only the last user input is used as context, so the LLM does not know about previous inputs.
         response = llm.invoke(user_input)
         print(response.content)
 

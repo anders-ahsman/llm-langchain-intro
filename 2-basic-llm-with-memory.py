@@ -16,10 +16,12 @@ def main():
         conversation += f"\nHuman: {user_input}"
         print(f"*** Conversation so far:\n{conversation}\n***\n")
 
+        # Here the entire conversation is used as the context, not just the last user input.
+        # That way the LLM can use the entire conversation to generate a response.
         response = llm.invoke(conversation)
         print(response.content)
 
-        # Add the response to the conversation
+        # Add the LLM's response to the conversation
         conversation += f"\n{response.content}"
 
 
