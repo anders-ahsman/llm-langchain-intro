@@ -10,7 +10,7 @@ SEARCH_NUM_RESULTS = 3
 def main():
     embeddings = OpenAIEmbeddings()
 
-    # Create a LanceDB table
+    # Create a LanceDB table, overwrite if it already exists.
     db = lancedb.connect("/tmp/lancedb")
     table = db.create_table(
         "my_table",
@@ -24,7 +24,7 @@ def main():
         mode="overwrite",
     )
 
-    # Create a LanceDB vectorstore and add some texts
+    # Create a LanceDB vectorstore and add example texts.
     vectorstore = LanceDB(table, embeddings)
     vectorstore.add_texts(EXAMPLE_TEXTS)
 
