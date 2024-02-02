@@ -55,7 +55,7 @@ def main():
 
 def get_embeddings_and_texts() -> Tuple[np.ndarray, list[str]]:
     """
-    Load embeddings and texts from file if available.
+    Try to load embeddings and texts from file.
     If file is not found, compute embeddings and save to file.
     """
 
