@@ -9,6 +9,7 @@ TEXT_FILE = "state_of_the_union.txt"
 def main():
     llm = ChatOpenAI(model_name=MODEL_NAME)
 
+    # Create a prompt that includes the context and the question
     template = """
     Answer the question based only on the following context:
     {context}
@@ -21,11 +22,13 @@ def main():
     with open(TEXT_FILE, "r") as f:
         context = f.read()
 
-    setup = RunnableParallel(
+    context_and_question = RunnableParallel(
         context=lambda _: context,  # Context too big for model, will throw an error!
         question=RunnablePassthrough(),
     )
-    chain = setup | prompt | llm
+
+    # Combine into chain
+    chain = context_and_question | prompt | llm
 
     while True:
         user_input = input("Ask a question (or type 'exit'): ")

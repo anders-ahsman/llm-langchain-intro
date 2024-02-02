@@ -8,6 +8,7 @@ MODEL_NAME = "gpt-3.5-turbo"
 def main():
     llm = ChatOpenAI(model_name=MODEL_NAME)
 
+    # Create a prompt that includes the context and the question
     template = """
     Answer the question based only on the following context:
     {context}
@@ -16,11 +17,14 @@ def main():
     """
     prompt = ChatPromptTemplate.from_template(template)
 
-    context = RunnableParallel(
-        context=lambda _: "USA first visited the moon in 1950.",
+    # Setup the context and placeholder for the question.
+    context_and_question = RunnableParallel(
+        context=lambda _: "USA first visited the moon in 1950.",  # static context as example
         question=RunnablePassthrough(),
     )
-    chain = context | prompt | llm
+
+    # Combine into chain
+    chain = context_and_question | prompt | llm
 
     while True:
         user_input = input("Ask a question (or type 'exit'): ")
