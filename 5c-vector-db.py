@@ -2,13 +2,8 @@ import lancedb
 from langchain_community.vectorstores import LanceDB
 from langchain_openai.embeddings import OpenAIEmbeddings
 
-EXAMPLE_TEXTS = [
-    "green fields",
-    "blue skies",
-    "red roses",
-    "dark night",
-    "crashing waves",
-]
+from common import EXAMPLE_TEXTS
+
 SEARCH_NUM_RESULTS = 3
 
 

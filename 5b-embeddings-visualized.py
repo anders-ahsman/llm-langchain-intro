@@ -5,44 +5,9 @@ import numpy as np
 from langchain_openai.embeddings import OpenAIEmbeddings
 from sklearn.manifold import TSNE
 
+from common import EXAMPLE_TEXTS
+
 EMBEDDINGS_FILENAME = "embeddings.npz"
-EXAMPLE_TEXTS = [
-    "green fields",
-    "blue skies",
-    "red roses",
-    "dark night",
-    "crashing waves",
-    "silent streets",
-    "golden sunrise",
-    "misty mornings",
-    "frozen lakes",
-    "blooming flowers",
-    "busy markets",
-    "distant mountains",
-    "sparkling stars",
-    "flowing rivers",
-    "ancient ruins",
-    "lush forests",
-    "rolling hills",
-    "stormy seas",
-    "blazing sunsets",
-    "whispering winds",
-    "glowing moon",
-    "soaring eagles",
-    "shimmering snow",
-    "peaceful meadows",
-    "vibrant cities",
-    "complex numbers",
-    "infinite series",
-    "parallel lines",
-    "circular geometry",
-    "rational expressions",
-    "geometric shapes",
-    "algebraic formulas",
-    "differential calculus",
-    "statistical data",
-    "logical proofs",
-]
 
 
 def main():
