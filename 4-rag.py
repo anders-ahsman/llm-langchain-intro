@@ -7,8 +7,8 @@ from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 from langchain_core.vectorstores import VectorStoreRetriever
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 
-CHUNK_SIZE = 1000
-CHUNK_OVERLAP = 100
+CHUNK_SIZE = 3000
+CHUNK_OVERLAP = 150
 TEXT_FILE = "state_of_the_union.txt"
 
 
