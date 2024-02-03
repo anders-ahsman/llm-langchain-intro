@@ -3,7 +3,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import Chroma
 from langchain_core.documents import Document
-from langchain_core.runnables import RunnableParallel, RunnablePassthrough
+from langchain_core.runnables import RunnablePassthrough, RunnableSequence
 from langchain_core.vectorstores import VectorStoreRetriever
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 
@@ -58,7 +58,7 @@ def get_vectordb_retriever(documents: list[Document]) -> VectorStoreRetriever:
     return retriever
 
 
-def setup_chain(retriever: VectorStoreRetriever):
+def setup_chain(retriever: VectorStoreRetriever) -> RunnableSequence:
     """
     Setup the chain that will be used to answer questions.
     """
@@ -76,14 +76,15 @@ def setup_chain(retriever: VectorStoreRetriever):
     def format_docs(docs):
         return "\n\n".join([d.page_content for d in docs])
 
-    # Setup the context and placeholder for the question.
-    context_and_question = RunnableParallel(
-        context=retriever | format_docs,
-        question=RunnablePassthrough(),
+    # Combine into chain
+    chain: RunnableSequence = (
+        {
+            "context": retriever | format_docs,
+            "question": RunnablePassthrough(),
+        }
+        | prompt
+        | llm
     )
-
-    # Combine into chain.
-    chain = context_and_question | prompt | llm
 
     return chain
 
