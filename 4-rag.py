@@ -73,9 +73,12 @@ def setup_chain(retriever: VectorStoreRetriever):
     """
     prompt = ChatPromptTemplate.from_template(template)
 
+    def format_docs(docs):
+        return "\n\n".join([d.page_content for d in docs])
+
     # Setup the context and placeholder for the question.
     context_and_question = RunnableParallel(
-        context=retriever,
+        context=retriever | format_docs,
         question=RunnablePassthrough(),
     )
 
