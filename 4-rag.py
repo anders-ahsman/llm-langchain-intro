@@ -9,6 +9,7 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 
 CHUNK_SIZE = 3000
 CHUNK_OVERLAP = 150
+SEARCH_NUM_RESULTS = 3
 TEXT_FILE = "state_of_the_union.txt"
 
 
@@ -53,7 +54,11 @@ def get_vectordb_retriever(documents: list[Document]) -> VectorStoreRetriever:
     embeddings = OpenAIEmbeddings()
     vectordb = Chroma.from_documents(documents, embeddings)
 
-    retriever = vectordb.as_retriever()
+    retriever = vectordb.as_retriever(
+        search_kwargs={
+            "k": SEARCH_NUM_RESULTS,
+        },
+    )
 
     return retriever
 
