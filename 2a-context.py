@@ -1,4 +1,5 @@
 from langchain.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 from langchain_openai import ChatOpenAI
 
@@ -24,7 +25,7 @@ def main():
     )
 
     # Combine into chain
-    chain = context_and_question | prompt | llm
+    chain = context_and_question | prompt | llm | StrOutputParser()
 
     while True:
         user_input = input("Ask a question (or type 'exit'): ")
@@ -32,7 +33,7 @@ def main():
             return
 
         response = chain.invoke(user_input)
-        print(response.content)
+        print(response)
 
 
 if __name__ == "__main__":

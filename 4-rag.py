@@ -3,6 +3,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import Chroma
 from langchain_core.documents import Document
+from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough, RunnableSequence
 from langchain_core.vectorstores import VectorStoreRetriever
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
@@ -26,7 +27,7 @@ def main():
             return
 
         response = chain.invoke(user_input)
-        print(response.content)
+        print(response)
 
 
 def load_documents() -> list[Document]:
@@ -89,6 +90,7 @@ def setup_chain(retriever: VectorStoreRetriever) -> RunnableSequence:
         }
         | prompt
         | llm
+        | StrOutputParser()
     )
 
     return chain
