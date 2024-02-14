@@ -16,9 +16,7 @@ TEXT_FILE = "state_of_the_union.txt"
 
 def main():
     documents = load_documents()
-
     retriever = get_vectordb_retriever(documents)
-
     chain = setup_chain(retriever)
 
     while True:
