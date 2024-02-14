@@ -24,9 +24,7 @@ def main():
         if user_input == "exit":
             return
 
-        for s in chain.stream(user_input):
-            print(s, end="", flush=True)
-        print()
+        call_chain_and_print_results(chain, user_input)
 
 
 def load_documents() -> list[Document]:
@@ -93,6 +91,17 @@ def setup_chain(retriever: VectorStoreRetriever) -> RunnableSequence:
     )
 
     return chain
+
+
+def call_chain_and_print_results(chain: RunnableSequence, user_input: str) -> None:
+    """
+    Call the chain with the user input and print the results (streaming).
+    """
+
+    for s in chain.stream(user_input):
+        print(s, end="", flush=True)
+
+    print()
 
 
 if __name__ == "__main__":
