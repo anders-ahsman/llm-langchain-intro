@@ -24,8 +24,9 @@ def main():
         if user_input == "exit":
             return
 
-        response = chain.invoke(user_input)
-        print(response)
+        for s in chain.stream(user_input):
+            print(s, end="", flush=True)
+        print()
 
 
 def load_documents() -> list[Document]:
