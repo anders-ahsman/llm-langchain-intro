@@ -8,3 +8,4 @@ Examples include:
 - Embeddings
 - Vector databases
 - Retrieval Augmented Generation (RAG)
+- Tools (provide custom functions to LLM)
