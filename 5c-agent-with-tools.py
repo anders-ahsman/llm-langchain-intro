@@ -47,7 +47,7 @@ def main():
         | OpenAIToolsAgentOutputParser()
     )
 
-    agent_executor = AgentExecutor(agent=agent, tools=tools)  # use verbose=True to see the intermediate steps
+    agent_executor = AgentExecutor(agent=agent, tools=tools)  # use verbose=True to see intermediate steps
 
     while True:
         user_input = input("Ask a question (or type 'exit'): ")
