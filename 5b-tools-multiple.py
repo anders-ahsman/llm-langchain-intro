@@ -37,7 +37,7 @@ def main():
     call_tool_list = RunnableLambda(call_tool).map()
     tool_chain = JsonOutputToolsParser() | call_tool_list | RunnableLambda(get_first_output)
 
-    # note: this handles multiple tools, but (at most) only one tool will be called
+    # note: this handles multiple tools, but only one tool will be called (or none)
     # e.g. "what is one plus two times three?" does not work
 
     while True:
