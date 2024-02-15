@@ -1,5 +1,4 @@
 from operator import itemgetter
-from typing import Union
 
 from langchain.output_parsers.openai_tools import JsonOutputToolsParser
 from langchain_core.runnables import Runnable, RunnableLambda, RunnablePassthrough
@@ -26,13 +25,13 @@ def main():
     llm = ChatOpenAI()
     llm_with_tools = llm.bind_tools(tools)
 
-    def call_tool(tool_invocation: dict) -> Union[str, Runnable]:
+    def call_tool(tool_invocation: dict) -> Runnable:
         """Function for dynamically constructing the end of the chain based on the model-selected tool."""
         tool = tool_map[tool_invocation["type"]]
         return RunnablePassthrough.assign(output=itemgetter("args") | tool)
 
-    def get_first_output(response: dict) -> str:
-        return response[0]["output"]
+    def get_first_output(responses: list[dict]) -> int:
+        return responses[0]["output"]
 
     call_tool_list = RunnableLambda(call_tool).map()
     tool_chain = JsonOutputToolsParser() | call_tool_list | RunnableLambda(get_first_output)
