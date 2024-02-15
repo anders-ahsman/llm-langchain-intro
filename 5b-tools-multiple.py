@@ -1,4 +1,5 @@
 from operator import itemgetter
+from typing import Any
 
 from langchain.output_parsers.openai_tools import JsonOutputToolsParser
 from langchain_core.runnables import Runnable, RunnableLambda, RunnablePassthrough
@@ -30,7 +31,7 @@ def main():
         tool = tool_map[tool_invocation["type"]]
         return RunnablePassthrough.assign(output=itemgetter("args") | tool)
 
-    def get_first_output(responses: list[dict]) -> int:
+    def get_first_output(responses: list[dict]) -> Any:
         return responses[0]["output"]
 
     call_tool_list = RunnableLambda(call_tool).map()
