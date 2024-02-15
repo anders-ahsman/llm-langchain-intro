@@ -9,3 +9,4 @@ Examples include:
 - Vector databases
 - Retrieval Augmented Generation (RAG)
 - Tools (provide custom functions to LLM)
+- Agents
