@@ -34,7 +34,7 @@ def main():
 
     tools = [add, multiply]
 
-    llm = ChatOpenAI(temperature=0)
+    llm = ChatOpenAI(model="gpt-3.5-turbo-1106", temperature=0)
     llm_with_tools = llm.bind_tools(tools)
 
     agent = (

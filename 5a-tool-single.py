@@ -10,7 +10,7 @@ def multiply(a: int, b: int) -> int:
 
 
 def main():
-    llm = ChatOpenAI()
+    llm = ChatOpenAI(model="gpt-3.5-turbo-1106", temperature=0)
 
     # setup LLM with multiply tool (function) available
     llm_with_tool = llm.bind_tools([multiply])
