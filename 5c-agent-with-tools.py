@@ -37,6 +37,7 @@ def main():
     llm = ChatOpenAI(model="gpt-3.5-turbo-1106", temperature=0)
     llm_with_tools = llm.bind_tools(tools)
 
+    # NOTE: this agent does not have any memory of previous calls, so conversation won't work
     agent = (
         {
             "input": itemgetter("input"),
