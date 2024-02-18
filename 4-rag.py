@@ -79,7 +79,9 @@ def setup_chain(retriever: VectorStoreRetriever) -> RunnableSequence:
     def format_docs(docs):
         return "\n\n".join([d.page_content for d in docs])
 
-    # Combine into chain
+    # Combine into RAG chain:
+    # 1. Retrieve documents relevant to the question (Retrieval)
+    # 2. Generate response to question using retrieved documents as context (Augmented Generation)
     chain: RunnableSequence = (
         {
             "context": retriever | format_docs,
