@@ -9,4 +9,7 @@ Examples include:
 - Vector databases
 - Retrieval Augmented Generation (RAG)
 - Tools (provide custom functions to LLM)
-- Agents
+
+The examples also briefly cover chains and agents:
+- Chain: hardcoded sequence of actions
+- Agent: use LLM to choose sequence of actions to take
