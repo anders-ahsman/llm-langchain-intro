@@ -10,13 +10,22 @@ def multiply(a: int, b: int) -> int:
 
 
 def main():
-    llm = ChatOpenAI(model="gpt-3.5-turbo-1106", temperature=0)
+    llm = ChatOpenAI(
+        model="gpt-3.5-turbo-1106",
+        temperature=0,
+    )
 
     # setup LLM with multiply tool (function) available
     llm_with_tool = llm.bind_tools([multiply])
 
     # setup chain for parsing LLM output and calling multiply tool
-    tool_chain = JsonOutputKeyToolsParser(key_name="multiply", return_single=True) | multiply
+    tool_chain = (
+        JsonOutputKeyToolsParser(
+            key_name="multiply",
+            return_single=True,
+        )
+        | multiply
+    )
 
     while True:
         user_input = input("Ask a question (or type 'exit'): ")

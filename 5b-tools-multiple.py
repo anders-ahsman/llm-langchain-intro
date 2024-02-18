@@ -23,7 +23,10 @@ def main():
     tools = [add, multiply]
     tool_map = {tool.name: tool for tool in tools}
 
-    llm = ChatOpenAI(model="gpt-3.5-turbo-1106", temperature=0)
+    llm = ChatOpenAI(
+        model="gpt-3.5-turbo-1106",
+        temperature=0,
+    )
     llm_with_tools = llm.bind_tools(tools)
 
     def call_tool(tool_invocation: dict) -> Runnable:
