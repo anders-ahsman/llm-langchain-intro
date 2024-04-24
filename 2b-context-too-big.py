@@ -3,7 +3,7 @@ from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 from langchain_openai import ChatOpenAI
 
 MODEL_NAME = "gpt-3.5-turbo"
-TEXT_FILE = "state_of_the_union.txt"
+TEXT_FILE = "king_lear.txt"
 
 
 def main():
