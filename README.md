@@ -13,3 +13,6 @@ Examples include:
 The examples also briefly cover chains and agents:
 - Chain: hardcoded sequence of actions
 - Agent: use LLM to choose sequence of actions to take
+
+# Setup
+Environment variable `OPENAI_API_KEY` needs to be set before running any of the examples.
