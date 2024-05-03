@@ -5,7 +5,7 @@ The LLM application framework [Langchain](https://python.langchain.com/) is used
 
 Examples include:
 - Context as input to LLM
-- Embeddings
+- Embeddings, including 2D visualization
 - Vector databases
 - Retrieval Augmented Generation (RAG)
 - Tools (provide custom functions to LLM)
