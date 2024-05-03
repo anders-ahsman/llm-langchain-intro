@@ -49,8 +49,8 @@ def get_vectordb_retriever(documents: list[Document]) -> VectorStoreRetriever:
     Create a vector database from the documents and return a retriever to the database.
     """
 
-    embeddings = OpenAIEmbeddings()
-    vectordb = Chroma.from_documents(documents, embeddings)
+    embeddings_model = OpenAIEmbeddings()
+    vectordb = Chroma.from_documents(documents, embeddings_model)
 
     retriever = vectordb.as_retriever(
         search_kwargs={
