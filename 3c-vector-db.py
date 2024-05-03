@@ -8,9 +8,7 @@ SEARCH_NUM_RESULTS = 3
 
 
 def main():
-    embeddings_model = OpenAIEmbeddings()
-
-    table, vectorstore = get_table_and_vectorstore(embeddings_model)
+    table, vectorstore = get_table_and_vectorstore()
 
     # Add example texts to the database
     vectorstore.add_texts(EXAMPLE_TEXTS)
@@ -31,7 +29,9 @@ def main():
         print()
 
 
-def get_table_and_vectorstore(embeddings_model):
+def get_table_and_vectorstore():
+    embeddings_model = OpenAIEmbeddings()
+
     # Create a LanceDB table, overwrite if it already exists.
     db = lancedb.connect("./lancedb")
     table = db.create_table(
