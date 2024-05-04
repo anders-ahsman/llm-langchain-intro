@@ -19,28 +19,39 @@ def main():
 
 
 def get_embeddings_and_texts() -> Tuple[np.ndarray, list[str]]:
-    """
-    Try to load embeddings and texts from file.
-    If file is not found, compute embeddings and save to file.
-    """
+    try:
+        embeddings, texts = load_embeddings()
+    except FileNotFoundError:
+        embeddings, texts = compute_and_save_embeddings()
+
+    return embeddings, texts
+
+
+def load_embeddings():
+    print("Loading embeddings and texts from file...")
+
+    data = np.load(EMBEDDINGS_FILENAME)
+    embeddings = data["embeddings"]
+    texts = data["texts"].tolist()  # Convert numpy array of objects back to list
+
+    print("Embeddings and texts loaded from file.")
+
+    return embeddings, texts
+
+
+def compute_and_save_embeddings():
+    print("Embeddings file not found, computing embeddings...")
 
     embeddings_model = OpenAIEmbeddings()
+    texts = EXAMPLE_TEXTS
 
-    try:
-        data = np.load(EMBEDDINGS_FILENAME)
-        embeddings = data["embeddings"]
-        texts = data["texts"].tolist()  # Convert numpy array of objects back to list
-        print("Embeddings and texts loaded from file.")
-    except FileNotFoundError:
-        print("Embeddings file not found, computing embeddings...")
+    # Note: This can be run in parallel for large datasets to speed up computation
+    embeddings = np.array([embeddings_model.embed_query(text) for text in texts])
 
-        texts = EXAMPLE_TEXTS
-        # Note: This can be run in parallel for large datasets to speed up computation
-        embeddings = np.array([embeddings_model.embed_query(text) for text in texts])
+    # Save embeddings and texts together
+    np.savez(EMBEDDINGS_FILENAME, embeddings=embeddings, texts=texts)
 
-        # Save embeddings and texts together
-        np.savez(EMBEDDINGS_FILENAME, embeddings=embeddings, texts=texts)
-        print("Embeddings and texts saved to file.")
+    print("Embeddings and texts saved to file.")
 
     return embeddings, texts
 
