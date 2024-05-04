@@ -6,6 +6,8 @@ from langchain_core.runnables import Runnable, RunnableLambda, RunnablePassthrou
 from langchain_core.tools import tool
 from langchain_openai import ChatOpenAI
 
+MODEL_NAME = "gpt-3.5-turbo-1106"
+
 
 @tool
 def add(a: int, b: int) -> int:
@@ -30,7 +32,7 @@ def main():
     tool_map = {tool.name: tool for tool in tools}
 
     llm = ChatOpenAI(
-        model="gpt-3.5-turbo-1106",
+        model=MODEL_NAME,
         temperature=0,
     )
     llm_with_tools = llm.bind_tools(tools)

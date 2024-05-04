@@ -2,6 +2,8 @@ from langchain.output_parsers import JsonOutputKeyToolsParser
 from langchain_core.tools import tool
 from langchain_openai import ChatOpenAI
 
+MODEL_NAME = "gpt-3.5-turbo-1106"
+
 
 @tool
 def multiply(a: int, b: int) -> int:
@@ -14,7 +16,7 @@ def multiply(a: int, b: int) -> int:
 
 def main():
     llm = ChatOpenAI(
-        model="gpt-3.5-turbo-1106",
+        model=MODEL_NAME,
         temperature=0,
     )
 
