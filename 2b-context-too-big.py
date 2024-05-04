@@ -18,9 +18,7 @@ def main():
     """
     prompt = ChatPromptTemplate.from_template(template)
 
-    # Use contents of text file as context
-    with open(TEXT_FILE, "r") as f:
-        context = f.read()
+    context = load_text_file()
 
     context_and_question = RunnableParallel(
         context=lambda _: context,  # Context too big for model, will throw an error!
@@ -37,6 +35,13 @@ def main():
 
         response = chain.invoke(user_input)
         print(response.content)
+
+
+def load_text_file() -> str:
+    with open(TEXT_FILE, "r") as f:
+        context = f.read()
+
+    return context
 
 
 if __name__ == "__main__":
