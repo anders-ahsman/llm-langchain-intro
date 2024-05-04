@@ -6,6 +6,9 @@ from langchain_openai import ChatOpenAI
 @tool
 def multiply(a: int, b: int) -> int:
     """Multiply two integers together."""
+
+    print(f"Multiplying {a} by {b}")
+
     return a * b
 
 
