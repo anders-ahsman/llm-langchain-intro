@@ -41,6 +41,7 @@ def main():
         return RunnablePassthrough.assign(output=itemgetter("args") | tool)
 
     def get_first_output(responses: list[dict]) -> Any:
+        # naive implementation, assumes only one tool was called
         return responses[0]["output"]
 
     call_tool_list = RunnableLambda(call_tool).map()
