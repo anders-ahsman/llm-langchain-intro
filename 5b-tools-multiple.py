@@ -13,16 +13,12 @@ MODEL_NAME = "gpt-3.5-turbo-1106"
 def add(a: int, b: int) -> int:
     """Add two integers together."""
 
-    print(f"Adding {a} and {b}")
-
     return a + b
 
 
 @tool
 def multiply(a: int, b: int) -> int:
     """Multiply two integers together."""
-
-    print(f"Multiplying {a} by {b}")
 
     return a * b
 

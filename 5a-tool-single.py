@@ -9,8 +9,6 @@ MODEL_NAME = "gpt-3.5-turbo-1106"
 def multiply(a: int, b: int) -> int:
     """Multiply two integers together."""
 
-    print(f"Multiplying {a} by {b}")
-
     return a * b
 
 
