@@ -8,33 +8,33 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.tools import tool
 from langchain_openai import ChatOpenAI
 
-MODEL_NAME = "gpt-3.5-turbo-1106"
+MODEL_NAME = "gpt-4-0613"
 
 
 @tool
-def add(a: int, b: int) -> int:
-    """Add two integers together."""
+def get_secret(name: str) -> str:
+    """Get secret about person."""
 
-    return a + b
+    secrets = {
+        "alice": "Alice is a secret agent.",
+        "bob": "Bob is a wizard.",
+        "charlie": "Charlie is a superhero.",
+        "dave": "Dave is a time traveler.",
+    }
 
-
-@tool
-def multiply(a: int, b: int) -> int:
-    """Multiply two integers together."""
-
-    return a * b
+    return secrets.get(name.lower(), "I don't know any secrets about that person.")
 
 
 def main():
     prompt = ChatPromptTemplate.from_messages(
         [
-            SystemMessage(content="You are very powerful assistant, but don't know current events"),
+            SystemMessage(content="You are very powerful assistant that can help with secrets about people."),
             ("user", "{input}"),
             MessagesPlaceholder(variable_name="agent_scratchpad"),
         ]
     )
 
-    tools = [add, multiply]
+    tools = [get_secret]
 
     llm = ChatOpenAI(
         model=MODEL_NAME,
