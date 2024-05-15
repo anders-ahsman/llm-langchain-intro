@@ -15,14 +15,27 @@ MODEL_NAME = "gpt-4-0613"
 def get_secret(name: str) -> str:
     """Get secret about person."""
 
-    secrets = {
+    names_to_secrets = {
         "alice": "Alice is a secret agent.",
         "bob": "Bob is a wizard.",
         "charlie": "Charlie is a superhero.",
         "dave": "Dave is a time traveler.",
     }
 
-    return secrets.get(name.lower(), "I don't know any secrets about that person.")
+    return names_to_secrets.get(name.lower(), "I don't know any secrets about that person.")
+
+
+@tool
+def get_employees_for_company(company: str) -> list[str]:
+    """Get employees working at company."""
+
+    companies_to_employees = {
+        "acme": ["Alice", "Bob"],
+        "ikea": ["Bob"],
+        "volvo": ["Charlie"],
+    }
+
+    return companies_to_employees.get(company.lower(), "I don't know about that company.")
 
 
 def main():
@@ -34,7 +47,7 @@ def main():
         ]
     )
 
-    tools = [get_secret]
+    tools = [get_secret, get_employees_for_company]
 
     llm = ChatOpenAI(
         model=MODEL_NAME,
