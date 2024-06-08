@@ -25,7 +25,7 @@ def main():
     tool_chain = (
         JsonOutputKeyToolsParser(
             key_name="multiply",
-            return_single=True,
+            first_tool_only=True,
         )
         | multiply
     )
