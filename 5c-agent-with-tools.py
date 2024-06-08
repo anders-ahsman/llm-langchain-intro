@@ -30,9 +30,9 @@ def get_employees_for_company(company: str) -> list[str]:
     """Get employees working at company."""
 
     companies_to_employees = {
-        "acme": ["Alice", "Bob"],
-        "ikea": ["Bob"],
-        "volvo": ["Charlie"],
+        "acme": ["alice", "bob"],
+        "ikea": ["dave"],
+        "volvo": ["charlie"],
     }
 
     return companies_to_employees.get(company.lower(), "I don't know about that company.")
